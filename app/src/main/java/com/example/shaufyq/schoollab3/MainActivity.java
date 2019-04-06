@@ -36,38 +36,44 @@ public class MainActivity extends AppCompatActivity {
 
         edtExDate = findViewById(R.id.date);
         edtExpname = findViewById(R.id.name);
-        edtExpTime = findViewById(R.id.time);
+        edtExpTime = findViewById(R.id.edtTime);
         edtExpPrice = findViewById(R.id.value);
 
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, strURL,
+
+
+
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://192.168.43.173/webServiceJSON.php";
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             edtExDate.setText(jsonObject.getString("currDate"));
                             edtExpTime.setText(jsonObject.getString("currTime"));
-                            Log.d(TAG, "onResponse: " + jsonObject.getString("currTime"));
-                        } catch (Exception ee) {
-                            Log.e(TAG, "onResponse: ", ee);
+                        }catch (Exception e){
+                            Log.d(TAG, "onResponse: " + response.substring(0,500));
+                            Log.e(TAG, "onResponse: ", e);
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "onErrorResponse: ", error );
+                Log.d(TAG, "onErrorResponse: That didn't work!");
+                Log.e(TAG, "onErrorResponse: ",error );
             }
-        }){
-          protected Map<String, String> getParams() throws AuthFailureError{
-              Map<String, String> params = new HashMap<String, String>();
-              params.put("selectFn", "fnGetDateTime");
-              return params;
-          }
-        };
+        });
 
-        requestQueue.add(stringRequest);
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
 
     }
 
