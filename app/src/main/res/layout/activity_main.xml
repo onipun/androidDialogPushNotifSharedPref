@@ -53,4 +53,18 @@
         android:onClick="goToExpensesList"
         android:text="Expenses" />
 
+    <Button
+        android:id="@+id/btnNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sendNotification"
+        android:text="sendNotification" />
+
+    <Button
+        android:id="@+id/btnDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showDialog"
+        android:text="show dialog" />
+
 </LinearLayout>
