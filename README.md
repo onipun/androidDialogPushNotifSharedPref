@@ -1,3 +1,5 @@
-# schoolLab3
+# schoolLab4
 
-how to use sqlite and recycleview.
+dialog, push notification and shared preferances
+*project continue from schoolLab3
+
